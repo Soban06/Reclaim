@@ -21,7 +21,7 @@ Each member reviews, runs and commits their own contribution. AI assistance was 
 - Python cleaning, explicit duplicate policy, missing-value handling and outlier treatment.
 - Train-fitted scaling/encoding and customer-separated validation split.
 - Five EDA figures, a descriptive bias audit and machine-readable evidence.
-- [LaTeX source](reports/deliverable1/main.tex) and compiled report (added after compilation).
+- [LaTeX source](reports/deliverable1/main.tex) and [compiled report](output/pdf/Reclaim_Deliverable_1.pdf).
 
 ## Dataset and scope
 
@@ -58,6 +58,8 @@ python "data scripts/preprocess.py"
 python "data scripts/eda.py"
 python "data scripts/validate_pipeline.py"
 ```
+
+`requirements-lock.txt` records the exact package versions used for the supplied results; install that file instead to reproduce the Python 3.12 environment precisely.
 
 The first command downloads the original three training tables and records their provenance. The next commands create an ignored development CSV, sparse matrices, labels, the fitted preprocessor, evidence JSON files and figures. For a smaller development run, pass `--sample-size 10000` to `clean_data.py`; regenerate all downstream results and the report if the sample changes.
 
