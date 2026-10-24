@@ -1,0 +1,72 @@
+{
+  "source_tables": {
+    "events": {
+      "rows": 1369133,
+      "columns": 3,
+      "missing_cells": 0,
+      "exact_duplicate_rows": 6551,
+      "duplicate_column_names": []
+    },
+    "customers": {
+      "rows": 777001,
+      "columns": 30,
+      "missing_cells": 0,
+      "exact_duplicate_rows": 0,
+      "duplicate_column_names": [
+        "customerId_level_return_code_D"
+      ]
+    },
+    "products": {
+      "rows": 411495,
+      "columns": 44,
+      "missing_cells": 0,
+      "exact_duplicate_rows": 0,
+      "duplicate_column_names": [
+        "variantID_level_return_code_D"
+      ]
+    }
+  },
+  "raw_return_counts": {
+    "1": 757227,
+    "0": 611906
+  },
+  "invalid_events_removed": 0,
+  "unmatched_customer_events": 71648,
+  "unmatched_product_events": 474590,
+  "events_excluded_missing_nodes": 520679,
+  "excluded_event_return_rate": 0.5622677311741016,
+  "invalid_numeric_values_to_missing": {
+    "avgGbpPrice": 0,
+    "avgDiscountValue": 0
+  },
+  "invalid_age_events": 12099,
+  "joined_events": 848454,
+  "sample_rows": 100000,
+  "sample_seed": 42,
+  "sample_return_rate": 0.54484,
+  "sample_missing_by_column": {
+    "variant_id": 0,
+    "customer_id": 0,
+    "isReturned": 0,
+    "source_row": 0,
+    "yearOfBirth": 0,
+    "isMale": 0,
+    "shippingCountry": 0,
+    "premier": 0,
+    "productType": 0,
+    "brandDesc": 0,
+    "avgGbpPrice": 0,
+    "avgDiscountValue": 0,
+    "age_2021": 1413
+  },
+  "event_duplicate_policy": "Preserved: repeated customer-variant-outcome tuples cannot be distinguished from legitimate repeat purchases. Node-table exact duplicates are removed before key validation.",
+  "excluded_predictors": [
+    "customer and product IDs",
+    "yearOfBirth / age_2021",
+    "isMale",
+    "sales/returns counts",
+    "customerReturnRate",
+    "productReturnRate",
+    "all return-reason proportions"
+  ]
+}
