@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "checks": [
+    "customer isolation",
+    "target excluded from features",
+    "missing-value transformation",
+    "unknown-category transformation",
+    "extreme-value transformation",
+    "no transform-time refitting",
+    "matrix dimensions",
+    "label alignment"
+  ],
+  "train_shape": [
+    80000,
+    35
+  ],
+  "validation_shape": [
+    20000,
+    35
+  ]
+}

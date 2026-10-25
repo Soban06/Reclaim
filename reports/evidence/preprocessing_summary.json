@@ -1,0 +1,66 @@
+{
+  "train_rows": 80000,
+  "validation_rows": 20000,
+  "train_customers": 75588,
+  "validation_customers": 18897,
+  "customer_overlap": 0,
+  "transformed_features": 35,
+  "train_return_rate": 0.5454375,
+  "validation_return_rate": 0.54245,
+  "numeric_features": [
+    "avgGbpPrice",
+    "avgDiscountValue"
+  ],
+  "categorical_features": [
+    "productType",
+    "brandDesc",
+    "shippingCountry",
+    "premier"
+  ],
+  "lower_clip_bounds": {
+    "avgGbpPrice": 4.16,
+    "avgDiscountValue": 12.86
+  },
+  "upper_clip_bounds": {
+    "avgGbpPrice": 100.32059999999967,
+    "avgDiscountValue": 21.27
+  },
+  "feature_names": [
+    "numeric__avgGbpPrice",
+    "numeric__avgDiscountValue",
+    "categorical__productType_Jeans",
+    "categorical__productType_productType_A",
+    "categorical__productType_productType_B",
+    "categorical__productType_productType_C",
+    "categorical__productType_productType_D",
+    "categorical__productType_productType_E",
+    "categorical__productType_productType_F",
+    "categorical__productType_productType_G",
+    "categorical__productType_productType_H",
+    "categorical__productType_productType_I",
+    "categorical__productType_productType_J",
+    "categorical__brandDesc_Brand_A",
+    "categorical__brandDesc_Brand_B",
+    "categorical__brandDesc_Brand_C",
+    "categorical__brandDesc_Brand_D",
+    "categorical__brandDesc_Brand_E",
+    "categorical__brandDesc_Brand_F",
+    "categorical__brandDesc_Brand_G",
+    "categorical__brandDesc_Brand_I",
+    "categorical__brandDesc_Brand_J",
+    "categorical__brandDesc_Brand_K",
+    "categorical__brandDesc_Pull&Bear",
+    "categorical__shippingCountry_Country_A",
+    "categorical__shippingCountry_Country_B",
+    "categorical__shippingCountry_Country_C",
+    "categorical__shippingCountry_Country_D",
+    "categorical__shippingCountry_Country_E",
+    "categorical__shippingCountry_Country_F",
+    "categorical__shippingCountry_Country_G",
+    "categorical__shippingCountry_Country_H",
+    "categorical__shippingCountry_Country_I",
+    "categorical__premier_0.0",
+    "categorical__premier_1.0"
+  ],
+  "scope": "Development preprocessing only. Aggregate price/discount timing is unverified. Not a chronological test or evidence of deployment-ready accuracy."
+}
