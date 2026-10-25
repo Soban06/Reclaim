@@ -1,0 +1,155 @@
+{
+  "sample_rows": 100000,
+  "product_type_rates": [
+    {
+      "productType": "productType_H",
+      "mean": 0.4317687683847039,
+      "size": 7819
+    },
+    {
+      "productType": "productType_J",
+      "mean": 0.4735309457579972,
+      "size": 46016
+    },
+    {
+      "productType": "productType_D",
+      "mean": 0.4873031179684989,
+      "size": 3111
+    },
+    {
+      "productType": "productType_G",
+      "mean": 0.49302707136997537,
+      "size": 2438
+    },
+    {
+      "productType": "productType_F",
+      "mean": 0.4939810834049871,
+      "size": 2326
+    },
+    {
+      "productType": "productType_A",
+      "mean": 0.5258620689655172,
+      "size": 2552
+    },
+    {
+      "productType": "productType_E",
+      "mean": 0.5665873959571938,
+      "size": 3364
+    },
+    {
+      "productType": "productType_C",
+      "mean": 0.6223175965665236,
+      "size": 2563
+    },
+    {
+      "productType": "productType_I",
+      "mean": 0.6406285584149396,
+      "size": 4391
+    },
+    {
+      "productType": "Jeans",
+      "mean": 0.6642559719482797,
+      "size": 9126
+    },
+    {
+      "productType": "productType_B",
+      "mean": 0.7200810114152448,
+      "size": 16294
+    }
+  ],
+  "country_rates": [
+    {
+      "shippingCountry": "Country_A",
+      "mean": 0.4514124293785311,
+      "size": 1770
+    },
+    {
+      "shippingCountry": "Country_B",
+      "mean": 0.634184068058778,
+      "size": 1293
+    },
+    {
+      "shippingCountry": "Country_C",
+      "mean": 0.4869816779170685,
+      "size": 1037
+    },
+    {
+      "shippingCountry": "Country_D",
+      "mean": 0.43425076452599387,
+      "size": 4251
+    },
+    {
+      "shippingCountry": "Country_E",
+      "mean": 0.6879228263593085,
+      "size": 23946
+    },
+    {
+      "shippingCountry": "Country_F",
+      "mean": 0.5986286919831224,
+      "size": 1896
+    },
+    {
+      "shippingCountry": "Country_G",
+      "mean": 0.4994403523974581,
+      "size": 55392
+    },
+    {
+      "shippingCountry": "Country_H",
+      "mean": 0.5127679912604124,
+      "size": 7323
+    },
+    {
+      "shippingCountry": "Country_I",
+      "mean": 0.48059508408796897,
+      "size": 3092
+    }
+  ],
+  "correlations": {
+    "avgGbpPrice": {
+      "avgGbpPrice": 1.0,
+      "avgDiscountValue": -0.03012989441627908,
+      "premier": 0.0015660742857177708,
+      "isReturned": 0.1270944752942641
+    },
+    "avgDiscountValue": {
+      "avgGbpPrice": -0.03012989441627908,
+      "avgDiscountValue": 1.0,
+      "premier": 0.014638805836115685,
+      "isReturned": -0.029365081699425106
+    },
+    "premier": {
+      "avgGbpPrice": 0.0015660742857177708,
+      "avgDiscountValue": 0.014638805836115685,
+      "premier": 1.0,
+      "isReturned": 0.0034587539751231144
+    },
+    "isReturned": {
+      "avgGbpPrice": 0.1270944752942641,
+      "avgDiscountValue": -0.029365081699425106,
+      "premier": 0.0034587539751231144,
+      "isReturned": 1.0
+    }
+  },
+  "numerical_summary": {
+    "avgGbpPrice": {
+      "count": 100000.0,
+      "mean": 24.7388996,
+      "std": 20.03009950369646,
+      "min": 1.73,
+      "25%": 12.6,
+      "50%": 19.7,
+      "75%": 29.65,
+      "max": 420.0
+    },
+    "avgDiscountValue": {
+      "count": 100000.0,
+      "mean": 17.1929081,
+      "std": 1.7906791095199392,
+      "min": 0.0,
+      "25%": 16.06,
+      "50%": 17.26,
+      "75%": 18.38,
+      "max": 40.0
+    }
+  }
+}
