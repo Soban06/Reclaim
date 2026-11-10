@@ -1,0 +1,29 @@
+{
+  "seed": 42,
+  "sample_sha256": "aa9a1da28eedac6d080512acc16aed281dd5fbab21acbcfa11ac35dbfa829f4b",
+  "features": [
+    "productType",
+    "brandDesc"
+  ],
+  "customer_overlap": 0,
+  "splits": {
+    "train": {
+      "purchases": 69996,
+      "customers": 66139,
+      "returned": 38150,
+      "kept": 31846
+    },
+    "validation": {
+      "purchases": 14964,
+      "customers": 14173,
+      "returned": 8102,
+      "kept": 6862
+    },
+    "test": {
+      "purchases": 15040,
+      "customers": 14173,
+      "returned": 8232,
+      "kept": 6808
+    }
+  }
+}
