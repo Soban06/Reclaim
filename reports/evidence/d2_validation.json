@@ -1,0 +1,66 @@
+{
+  "candidates": [
+    {
+      "kind": "logistic",
+      "settings": {
+        "C": 0.1
+      },
+      "roc_auc": 0.6156413462972573
+    },
+    {
+      "kind": "logistic",
+      "settings": {
+        "C": 1.0
+      },
+      "roc_auc": 0.6156116139017673
+    },
+    {
+      "kind": "logistic",
+      "settings": {
+        "C": 10.0
+      },
+      "roc_auc": 0.6156116139017673
+    },
+    {
+      "kind": "tree",
+      "settings": {
+        "max_depth": 3,
+        "min_samples_leaf": 200
+      },
+      "roc_auc": 0.5930594840010214
+    },
+    {
+      "kind": "tree",
+      "settings": {
+        "max_depth": 3,
+        "min_samples_leaf": 50
+      },
+      "roc_auc": 0.5930594840010214
+    },
+    {
+      "kind": "tree",
+      "settings": {
+        "max_depth": 6,
+        "min_samples_leaf": 200
+      },
+      "roc_auc": 0.6133525364197563
+    },
+    {
+      "kind": "tree",
+      "settings": {
+        "max_depth": 6,
+        "min_samples_leaf": 50
+      },
+      "roc_auc": 0.6132506584475509
+    }
+  ],
+  "winner": {
+    "kind": "logistic",
+    "settings": {
+      "C": 0.1
+    },
+    "roc_auc": 0.6156413462972573
+  },
+  "threshold": 0.42000000000000004,
+  "validation_f1_at_threshold": 0.7025058527703113
+}
