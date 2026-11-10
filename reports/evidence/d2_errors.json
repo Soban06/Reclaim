@@ -1,0 +1,226 @@
+{
+  "shipping_country": [
+    {
+      "group": "Country_A",
+      "purchases": 276,
+      "returns": 142,
+      "kept": 134,
+      "false_positives": 134,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "Country_B",
+      "purchases": 161,
+      "returns": 96,
+      "kept": 65,
+      "false_positives": 65,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "Country_C",
+      "purchases": 141,
+      "returns": 60,
+      "kept": 81,
+      "false_positives": 81,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "Country_D",
+      "purchases": 667,
+      "returns": 308,
+      "kept": 359,
+      "false_positives": 359,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "Country_E",
+      "purchases": 3553,
+      "returns": 2446,
+      "kept": 1107,
+      "false_positives": 1107,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "Country_F",
+      "purchases": 295,
+      "returns": 180,
+      "kept": 115,
+      "false_positives": 115,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "Country_G",
+      "purchases": 8334,
+      "returns": 4189,
+      "kept": 4145,
+      "false_positives": 4145,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "Country_H",
+      "purchases": 1131,
+      "returns": 587,
+      "kept": 544,
+      "false_positives": 544,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "Country_I",
+      "purchases": 482,
+      "returns": 224,
+      "kept": 258,
+      "false_positives": 258,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    }
+  ],
+  "product_type": [
+    {
+      "group": "Jeans",
+      "purchases": 1367,
+      "returns": 887,
+      "kept": 480,
+      "false_positives": 480,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "productType_A",
+      "purchases": 388,
+      "returns": 209,
+      "kept": 179,
+      "false_positives": 179,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "productType_B",
+      "purchases": 2427,
+      "returns": 1759,
+      "kept": 668,
+      "false_positives": 668,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "productType_C",
+      "purchases": 407,
+      "returns": 240,
+      "kept": 167,
+      "false_positives": 167,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "productType_D",
+      "purchases": 497,
+      "returns": 254,
+      "kept": 243,
+      "false_positives": 243,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "productType_E",
+      "purchases": 514,
+      "returns": 306,
+      "kept": 208,
+      "false_positives": 208,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "productType_F",
+      "purchases": 350,
+      "returns": 181,
+      "kept": 169,
+      "false_positives": 169,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "productType_G",
+      "purchases": 376,
+      "returns": 199,
+      "kept": 177,
+      "false_positives": 177,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "productType_H",
+      "purchases": 1152,
+      "returns": 514,
+      "kept": 638,
+      "false_positives": 638,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "productType_I",
+      "purchases": 654,
+      "returns": 432,
+      "kept": 222,
+      "false_positives": 222,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    },
+    {
+      "group": "productType_J",
+      "purchases": 6908,
+      "returns": 3251,
+      "kept": 3657,
+      "false_positives": 3657,
+      "false_negatives": 0,
+      "recall": 1.0,
+      "false_positive_rate": 1.0,
+      "small_group": false
+    }
+  ]
+}
