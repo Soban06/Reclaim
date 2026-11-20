@@ -1,93 +1,60 @@
 # Reclaim
 
-**AI-assisted return-risk prediction for e-commerce â€” Track A, Application Development.**
+Reclaim is a Track A AI project for estimating whether an individual fashion purchase will be returned. The Deliverable 2 model uses product type and brand to score purchase events.
 
-Reclaim aims to help e-commerce operations teams anticipate product returns. The planned application will accept purchase information and present a return-risk score. The current milestone implements the data foundations; a trained model and hosted application are future work.
+## Deliverables
+
+- **Deliverable 1 — Data foundations:** [report](output/pdf/Reclaim_Deliverable_1.pdf) and [LaTeX source](reports/deliverable1/main.tex).
+- **Deliverable 2 — Model and evaluation:** [report](output/pdf/Reclaim_Deliverable_2.pdf), [LaTeX source](reports/deliverable2/main.tex), [validation results](reports/evidence/d2_validation.json), and [held-out results](reports/evidence/d2_test.json).
+- **[Download the trained model](https://raw.githubusercontent.com/Soban06/Reclaim/3317eb0d46996ac69a0430b513bf9ddc4d84a55c/models/d2_model.joblib)** (2,976 bytes). The file contains the fitted scikit-learn pipeline, the two input column names, and the validation-selected cutoff. Use scikit-learn 1.9.1 to load it. Load only a trusted copy of the artifact.
 
 ## Team
 
-| Member | Student ID | GitHub | Proposed responsibility |
+| Member | Student ID | GitHub | Deliverable 2 work |
 | --- | --- | --- | --- |
-| Muhammad Soban Sohail | 24L-2545 | [Soban06](https://github.com/Soban06) | Problem definition, report and integration |
-| Mahad Jawad Rana | 24L-2504 | [Mahad-Jawad](https://github.com/Mahad-Jawad) | Acquisition, provenance and cleaning |
-| Taimur Amir | 24L-2518 | [taimurrrr](https://github.com/taimurrrr) | Preprocessing, EDA and validation |
+| Muhammad Soban Sohail | 24L-2545 | [Soban06](https://github.com/Soban06) | Held-out metrics and group error analysis |
+| Mahad Jawad Rana | 24L-2504 | [Mahad-Jawad](https://github.com/Mahad-Jawad) | Data checks, customer split, and split evidence |
+| Taimur Amir | 24L-2518 | [taimurrrr](https://github.com/taimurrrr) | Baselines, model selection, and learning curves |
 
-Each member reviews, runs and commits their own contribution. AI assistance was used in drafting and implementation; the team is responsible for understanding and validating the submission.
+AI assistance was used to generate code and draft documentation. The report maps repository commits to the files and outputs they added.
 
-## Deliverable 1
+## Reproduce Deliverable 2
 
-- Problem statement, target audience and ML justification.
-- Original-source download script, metadata and SHA-256 verification.
-- Python cleaning, explicit duplicate policy, missing-value handling and outlier treatment.
-- Train-fitted scaling/encoding and customer-separated validation split.
-- Five EDA figures, a descriptive bias audit and machine-readable evidence.
-- [LaTeX source](reports/deliverable1/main.tex) and [compiled report](output/pdf/Reclaim_Deliverable_1.pdf).
-
-## Dataset and scope
-
-Source: [ASOS GraphReturns on OSF](https://osf.io/c793h/), described by [McGowan et al. (2023)](https://arxiv.org/abs/2302.14096), licensed **CC BY 4.0** according to OSF metadata. Credit belongs to the original dataset creators. Reclaim selects fields, joins tables, samples events and transforms features; it is not affiliated with ASOS.
-
-The downloaded training release contains 1,369,133 purchase events, 777,001 customer rows and 411,495 product rows (about 364 MB). Raw/processed data is ignored by Git and obtained from the original repository. Allow roughly 2 GB of disk space and several GB of available RAM when running the pipeline.
-
-The target is **an individual purchase event's return outcome**, not a complete multi-item order. The data lacks order IDs and exact event dates. Price/discount fields are product averages; shipping country is available, but shipping method and delivery duration are not.
-
-### Important findings
-
-- 520,679 events lack at least one required node match. The usable join contains 848,454 events. Exclusion counts are recorded in `reports/evidence/data_audit.json`.
-- A deterministic 100,000-event sample yields 80,000 training and 20,000 validation rows, with zero customer overlap and 35 transformed features.
-- The raw return rate is about 55.31%; the development sample rate is 54.484%.
-- Customers were selected for having return history; these rates are not population estimates.
-- Return-rate/count/reason features are excluded because their timing is uncertain. Average price/discount timing also needs verification before production modeling. This is a preprocessing demonstration, not a leakage-free performance benchmark.
-- Repeated event tuples are preserved because they may represent real repeat purchases. Node duplicates are removed before key validation (none found in this release).
-
-## Run locally
-
-Python 3.12 is recommended. From the repository root:
+Run from the repository root. Use an environment that can install the pinned packages in [requirements-lock.txt](requirements-lock.txt). The published evaluation run used Python 3.14 and scikit-learn 1.9.1. The following commands use the Python executable in your active environment.
 
 ```sh
-python -m venv .venv
-```
-
-Activate on Windows PowerShell with `.venv\Scripts\Activate.ps1`, or on macOS/Linux with `source .venv/bin/activate`. Then:
-
-```sh
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-lock.txt
 python "data scripts/download_data.py"
 python "data scripts/clean_data.py"
-python "data scripts/preprocess.py"
-python "data scripts/eda.py"
-python "data scripts/validate_pipeline.py"
+python src/load_data.py
+python src/make_split.py
+python src/baselines.py
+python src/train_models.py
+python src/evaluate_model.py
+python src/check_errors.py
 ```
 
-`requirements-lock.txt` records the exact package versions used for the supplied results; install that file instead to reproduce the Python 3.12 environment precisely.
+Acquisition needs internet access and downloads about 364 MB. The training and evaluation commands create their working files in data/processed/, including a regenerated d2_model.joblib. Summary JSON and figures go to reports/evidence/ and reports/figures/. Run the original Phase 1 scripts preprocess.py, eda.py, and validate_pipeline.py under data scripts/ to reproduce the earlier preprocessing and EDA.
 
-The first command downloads the original three training tables and records their provenance. The next commands create an ignored development CSV, sparse matrices, labels, the fitted preprocessor, evidence JSON files and figures. For a smaller development run, pass `--sample-size 10000` to `clean_data.py`; regenerate all downstream results and the report if the sample changes.
-
-Only checksum-pinned original files are supported by the source loader. Do not replace them with arbitrary pickle files. The optional downloader `--split testing` retrieves the official later-period files, but the current cleaning script intentionally processes training files only.
-
-### Repository layout
-
-```text
-data scripts/              Acquisition, cleaning, preprocessing, EDA and validation
-data/raw/                  Original files (ignored)
-data/processed/            Generated sample, matrices and preprocessor (ignored)
-docs/                      Problem definition, data card and team workflow
-reports/evidence/          Download manifests, quality audit and run summaries
-reports/figures/           Reproducible EDA charts
-reports/deliverable1/      Self-contained LaTeX source and image copies
-output/pdf/                Compiled submission report
-```
-
-### Build the report
-
-Upload the contents of `reports/deliverable1/` to Overleaf and compile `main.tex`, or use a local LaTeX installation. Copy updated figures into `reports/deliverable1/images/` if rerunning EDA. A local Tectonic installation can compile with:
+To rebuild the Deliverable 2 PDF from the repository root in PowerShell:
 
 ```sh
-tectonic reports/deliverable1/main.tex --outdir output/pdf
+tectonic reports/deliverable2/main.tex --outdir output/pdf
+if ($LASTEXITCODE -eq 0) { Move-Item -Force output/pdf/main.pdf output/pdf/Reclaim_Deliverable_2.pdf }
 ```
 
-## Validation and later milestones
+## Evaluation
 
-`validate_pipeline.py` checks customer isolation, excluded targets, label alignment, saved matrix dimensions, missing/unseen/extreme inputs and unchanged fitted parameters during transformation. These are pipeline checks, not model evaluation.
+The 100,000-event development sample was divided by customer into 69,996 training, 14,964 validation, and 15,040 test events, with zero customer overlap. Preprocessing was fitted on training data. Validation selected logistic regression and a cutoff of 0.42. Test results were:
 
-Next: resolve timing/provenance limitations; compare simple baselines and classifiers; evaluate discrimination, calibration and group performance; then host the frontend and model backend.
+| Method | Accuracy | Precision | Recall | F1 | ROC-AUC |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Always predict returned | 0.547 | 0.547 | 1.000 | 0.707 | 0.500 |
+| Product-type return-rate rule | 0.580 | 0.666 | 0.466 | 0.548 | 0.607 |
+| Logistic regression | 0.547 | 0.547 | 1.000 | 0.707 | 0.614 |
+
+The logistic model ranked returns slightly better than the product-type rule. At 0.42 it flagged all 15,040 test purchases, including all 6,808 kept purchases. The report documents this operating-point failure and the [group error analysis](reports/evidence/d2_errors.json).
+
+## Data and scope
+
+The [ASOS GraphReturns dataset](https://osf.io/c793h/) is described by [McGowan et al.](https://arxiv.org/abs/2302.14096) and listed as CC BY 4.0 by OSF. Reclaim uses a sample of joined events from the original training release. About 38% of raw events lacked a required customer or product match. The source selected customers with return history, and the separate later-period release was unused. The target is an individual purchase event, since the release has no basket identifiers. Product-average price and discount were excluded because their timing is uncertain. Shipping country was used for error analysis. See the [data card](docs/data_card.md) for provenance and limitations.
