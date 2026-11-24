@@ -52,7 +52,7 @@ streamlit run app/streamlit_app.py
 
 The app opens at http://localhost:8501. It loads the trained model from `models/final_model.joblib`, so it does not need the dataset.
 
-- **Single purchase:** pick a product type, brand, shipping country and customer details, and the score updates straight away.
+- **Single purchase:** pick a product type, brand, shipping country and customer details, and the score updates straight away. Each category option shows its training return rate and share of purchases.
 - **Upload a file:** upload a CSV with the columns `productType`, `brandDesc`, `shippingCountry`, `age_2021`, `isMale` and `premier`. You can download [a sample file](app/sample_purchases.csv) from the app. Results can be downloaded as a CSV.
 
 Run the tests with:
@@ -77,9 +77,10 @@ python src/evaluate_model.py
 python src/check_errors.py
 python src/train_final.py
 python src/evaluate_final.py
+python src/category_stats.py
 ```
 
-The Deliverable 2 scripts write working files to `data/processed/`. `train_final.py` saves the final model to `models/`. Summary files go to `reports/evidence/` and figures to `reports/figures/`. The Deliverable 1 scripts `preprocess.py`, `eda.py` and `validate_pipeline.py` in `data scripts/` reproduce the earlier preprocessing and charts.
+The Deliverable 2 scripts write working files to `data/processed/`. `train_final.py` saves the final model to `models/`, and `category_stats.py` saves the dropdown statistics to `app/category_stats.json`. Summary files go to `reports/evidence/` and figures to `reports/figures/`. The Deliverable 1 scripts `preprocess.py`, `eda.py` and `validate_pipeline.py` in `data scripts/` reproduce the earlier preprocessing and charts.
 
 To rebuild the final report with [Tectonic](https://tectonic-typesetting.github.io/):
 
@@ -106,7 +107,7 @@ Then rename `output/pdf/main.pdf` to `output/pdf/Reclaim_Final_Report.pdf`.
 The data is the [ASOS GraphReturns dataset](https://osf.io/c793h/), described by [McGowan et al. (2023)](https://arxiv.org/abs/2302.14096) and licensed CC BY 4.0. Reclaim is not affiliated with ASOS. The raw and processed data are not stored in this repository.
 
 - The target is one purchase event, because the data has no order or basket IDs.
-- Most product types, brands and countries are anonymised (for example `productType_B`), so the app shows those codes.
+- ASOS anonymised most product types, brands and countries (for example `productType_B`); only Jeans and Pull&Bear keep their real names. The app shows each code with its training return rate and share of purchases.
 - The source selected customers with a return history, so probabilities are higher than for a typical shopper.
 - Average price and discount were left out because it is unclear when they were recorded.
 - A ROC-AUC of 0.651 means the model ranks returns better than chance and better than the baselines, but it will still make many mistakes. Use it as a planning signal, not to make decisions about individual customers.

@@ -221,7 +221,7 @@ productType\_H & 1,152 & 514 & 0.253 & 0.119 & 384\\ \bottomrule
 The application is written in Streamlit~\cite{streamlit} and hosted on Streamlit Community Cloud from the GitHub repository. It has three tabs.
 
 \begin{itemize}
-\item \textbf{Single purchase.} Drop-down lists offer only the product types, brands and countries the model was trained on, so users cannot enter unknown values. The score updates as soon as an input changes. The app shows the return probability, a likely-return or likely-keep decision, a risk band and the product type's training return rate for context.
+\item \textbf{Single purchase.} Drop-down lists offer only the product types, brands and countries the model was trained on, so users cannot enter unknown values. Because the source anonymises most of these names, each option shows its training return rate and share of purchases, for example ``productType\_B (72\% returned, 16\% of purchases)'', and the lists are sorted from highest to lowest return rate. The score updates as soon as an input changes. The app shows the return probability, a likely-return or likely-keep decision, a risk band and the product type's training return rate for context.
 \item \textbf{Explanation.} For each input, the app swaps in the most common training value and reports how much the probability changes. This model-agnostic check tells the user which inputs push this purchase's risk up or down.
 \item \textbf{Upload a file.} Users upload a CSV of purchases and receive a scored table they can download. The backend reports missing columns as errors. Unknown categories, invalid ages and invalid flags become warnings, and those values are treated as unknown instead of stopping the whole file. A sample file of 25 held-out purchases is provided for demonstrations.
 \item \textbf{About.} A summary of the data, model, cutoff, held-out results and limitations.
@@ -240,7 +240,7 @@ The file \texttt{tests/test\_predict.py} holds eight automated tests for the bac
 \item \textbf{Modest signal.} A ROC-AUC of 0.651 is clearly better than chance and than the baselines, but the model still misclassifies about 39\% of purchases.
 \item \textbf{Population.} The source selected customers with a return history, so probabilities are higher than for a typical shopper. Excluded events, about 38\% of the original data, had a slightly higher return rate.
 \item \textbf{Time.} All partitions come from one training period. The official later-period test release was not used, so we have not measured how the model holds up over time.
-\item \textbf{Anonymised labels.} Most category names are codes, which limits interpretation and makes the app less friendly for real users.
+\item \textbf{Anonymised labels.} ASOS released most category names as codes, and only Jeans and Pull\&Bear keep their real names. The app adds each code's return rate and share, but users still cannot tell which real products, brands or countries the codes stand for.
 \item \textbf{Future work.} Evaluate on the later-period release; add customer history built only from earlier purchases; add exact order prices if timestamps become available; calibrate the probabilities; and set the cutoff from real costs of missed returns and false alarms.
 \end{itemize}
 
