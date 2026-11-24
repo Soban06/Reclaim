@@ -1,0 +1,68 @@
+[
+  {
+    "productType": "productType_B",
+    "brandDesc": "Brand_K",
+    "shippingCountry": "Country_E",
+    "age_2021": 71.0,
+    "isMale": 0.0,
+    "premier": 0.0,
+    "return_probability": 0.872,
+    "prediction": "Likely return",
+    "actual": "Returned"
+  },
+  {
+    "productType": "productType_B",
+    "brandDesc": "Brand_K",
+    "shippingCountry": "Country_E",
+    "age_2021": 28.0,
+    "isMale": 0.0,
+    "premier": 0.0,
+    "return_probability": 0.8733,
+    "prediction": "Likely return",
+    "actual": "Kept"
+  },
+  {
+    "productType": "productType_B",
+    "brandDesc": "Brand_K",
+    "shippingCountry": "Country_E",
+    "age_2021": 73.0,
+    "isMale": 0.0,
+    "premier": 0.0,
+    "return_probability": 0.924,
+    "prediction": "Likely return",
+    "actual": "Returned"
+  },
+  {
+    "productType": "productType_H",
+    "brandDesc": "Pull&Bear",
+    "shippingCountry": "Country_G",
+    "age_2021": 19.0,
+    "isMale": 1.0,
+    "premier": 0.0,
+    "return_probability": 0.2113,
+    "prediction": "Likely keep",
+    "actual": "Returned"
+  },
+  {
+    "productType": "productType_H",
+    "brandDesc": "Pull&Bear",
+    "shippingCountry": "Country_G",
+    "age_2021": 19.0,
+    "isMale": 0.0,
+    "premier": 0.0,
+    "return_probability": 0.2172,
+    "prediction": "Likely keep",
+    "actual": "Kept"
+  },
+  {
+    "productType": "productType_H",
+    "brandDesc": "Pull&Bear",
+    "shippingCountry": "Country_D",
+    "age_2021": 20.0,
+    "isMale": 1.0,
+    "premier": 0.0,
+    "return_probability": 0.2202,
+    "prediction": "Likely keep",
+    "actual": "Kept"
+  }
+]
