@@ -1,6 +1,11 @@
-pandas>=2.2,<3
-numpy>=1.26,<3
-scikit-learn>=1.5,<2
-scipy>=1.11,<2
-matplotlib>=3.9,<4
-joblib>=1.4,<2
+# Packages for the app, tests and training scripts.
+# scikit-learn must stay at 1.9.1 to load models/final_model.joblib.
+pandas==2.3.3
+numpy==2.5.3
+scikit-learn==1.9.1
+scipy==1.18.1
+matplotlib==3.11.2
+joblib==1.6.0
+streamlit==1.67.0
+uvicorn==0.54.0
+pytest==9.2.0
