@@ -1,0 +1,153 @@
+{
+  "features": [
+    "productType",
+    "brandDesc",
+    "shippingCountry",
+    "age_2021",
+    "isMale",
+    "premier"
+  ],
+  "candidates": [
+    {
+      "inputs": "deliverable_2_inputs",
+      "kind": "logistic",
+      "settings": {
+        "C": 0.1
+      },
+      "roc_auc": 0.6156413462972573
+    },
+    {
+      "inputs": "deliverable_2_inputs",
+      "kind": "logistic",
+      "settings": {
+        "C": 1.0
+      },
+      "roc_auc": 0.6156116139017673
+    },
+    {
+      "inputs": "deliverable_2_inputs",
+      "kind": "logistic",
+      "settings": {
+        "C": 10.0
+      },
+      "roc_auc": 0.6156116139017673
+    },
+    {
+      "inputs": "deliverable_2_inputs",
+      "kind": "boosting",
+      "settings": {
+        "max_depth": 3,
+        "learning_rate": 0.03,
+        "max_iter": 300
+      },
+      "roc_auc": 0.6167644232336168
+    },
+    {
+      "inputs": "deliverable_2_inputs",
+      "kind": "boosting",
+      "settings": {
+        "max_depth": 3,
+        "learning_rate": 0.1,
+        "max_iter": 300
+      },
+      "roc_auc": 0.6150637859710723
+    },
+    {
+      "inputs": "deliverable_2_inputs",
+      "kind": "boosting",
+      "settings": {
+        "max_depth": 5,
+        "learning_rate": 0.03,
+        "max_iter": 300
+      },
+      "roc_auc": 0.6150688223115062
+    },
+    {
+      "inputs": "deliverable_2_inputs",
+      "kind": "boosting",
+      "settings": {
+        "max_depth": 5,
+        "learning_rate": 0.1,
+        "max_iter": 300
+      },
+      "roc_auc": 0.6151206606441149
+    },
+    {
+      "inputs": "order_time_inputs",
+      "kind": "logistic",
+      "settings": {
+        "C": 0.1
+      },
+      "roc_auc": 0.6491870339271635
+    },
+    {
+      "inputs": "order_time_inputs",
+      "kind": "logistic",
+      "settings": {
+        "C": 1.0
+      },
+      "roc_auc": 0.6491579310742277
+    },
+    {
+      "inputs": "order_time_inputs",
+      "kind": "logistic",
+      "settings": {
+        "C": 10.0
+      },
+      "roc_auc": 0.6491548193353168
+    },
+    {
+      "inputs": "order_time_inputs",
+      "kind": "boosting",
+      "settings": {
+        "max_depth": 3,
+        "learning_rate": 0.03,
+        "max_iter": 300
+      },
+      "roc_auc": 0.6521935133230271
+    },
+    {
+      "inputs": "order_time_inputs",
+      "kind": "boosting",
+      "settings": {
+        "max_depth": 3,
+        "learning_rate": 0.1,
+        "max_iter": 300
+      },
+      "roc_auc": 0.651287259835811
+    },
+    {
+      "inputs": "order_time_inputs",
+      "kind": "boosting",
+      "settings": {
+        "max_depth": 5,
+        "learning_rate": 0.03,
+        "max_iter": 300
+      },
+      "roc_auc": 0.6526692406443321
+    },
+    {
+      "inputs": "order_time_inputs",
+      "kind": "boosting",
+      "settings": {
+        "max_depth": 5,
+        "learning_rate": 0.1,
+        "max_iter": 300
+      },
+      "roc_auc": 0.6497235300918822
+    }
+  ],
+  "winner": {
+    "inputs": "order_time_inputs",
+    "kind": "boosting",
+    "settings": {
+      "max_depth": 5,
+      "learning_rate": 0.03,
+      "max_iter": 300
+    },
+    "roc_auc": 0.6526692406443321
+  },
+  "threshold": 0.57,
+  "threshold_rule": "maximum validation balanced accuracy, cutoffs 0.30 to 0.70",
+  "validation_balanced_accuracy": 0.6198373823232077
+}
