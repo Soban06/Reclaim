@@ -1,26 +1,69 @@
 # Reclaim
 
-Reclaim is a Track A AI project for estimating whether an individual fashion purchase will be returned. The Deliverable 2 model uses product type and brand to score purchase events.
+Reclaim predicts whether a single fashion purchase will be returned. It is a Track A (application development) project for the Artificial Intelligence course. Operations, inventory and customer-experience teams can score one order or a whole CSV file in a Streamlit web app and see the return probability, a likely-return or likely-keep decision, and the inputs that drive the score.
+
+**Live app:** [reclaim-return-risk.streamlit.app](https://reclaim-return-risk.streamlit.app)
 
 ## Deliverables
 
-- **Deliverable 1 — Data foundations:** [report](output/pdf/Reclaim_Deliverable_1.pdf) and [LaTeX source](reports/deliverable1/main.tex).
-- **Deliverable 2 — Model and evaluation:** [report](output/pdf/Reclaim_Deliverable_2.pdf), [LaTeX source](reports/deliverable2/main.tex), [validation results](reports/evidence/d2_validation.json), and [held-out results](reports/evidence/d2_test.json).
-- **[Download the trained model](https://raw.githubusercontent.com/Soban06/Reclaim/3317eb0d46996ac69a0430b513bf9ddc4d84a55c/models/d2_model.joblib)** (2,976 bytes). The file contains the fitted scikit-learn pipeline, the two input column names, and the validation-selected cutoff. Use scikit-learn 1.9.1 to load it. Load only a trusted copy of the artifact.
+| Deliverable | Report | Main outputs |
+| --- | --- | --- |
+| 1. Data foundations | [PDF](output/pdf/Reclaim_Deliverable_1.pdf), [LaTeX](reports/deliverable1/main.tex) | [Data card](docs/data_card.md), [data audit](reports/evidence/data_audit.json) |
+| 2. Model and evaluation | [PDF](output/pdf/Reclaim_Deliverable_2.pdf), [LaTeX](reports/deliverable2/main.tex) | [Validation](reports/evidence/d2_validation.json), [held-out results](reports/evidence/d2_test.json) |
+| 3. Final deployment and report | [PDF](output/pdf/Reclaim_Final_Report.pdf), [LaTeX](reports/final/main.tex) | [Streamlit app](app/streamlit_app.py), [final model](models/final_model.joblib), [held-out results](reports/evidence/final_test.json) |
 
 ## Team
 
-| Member | Student ID | GitHub | Deliverable 2 work |
+| Member | Student ID | GitHub | Deliverable 3 work |
 | --- | --- | --- | --- |
-| Muhammad Soban Sohail | 24L-2545 | [Soban06](https://github.com/Soban06) | Held-out metrics and group error analysis |
-| Mahad Jawad Rana | 24L-2504 | [Mahad-Jawad](https://github.com/Mahad-Jawad) | Data checks, customer split, and split evidence |
-| Taimur Amir | 24L-2518 | [taimurrrr](https://github.com/taimurrrr) | Baselines, model selection, and learning curves |
+| Muhammad Soban Sohail | 24L-2545 | [Soban06](https://github.com/Soban06) | Streamlit app, deployment, final report and README |
+| Mahad Jawad Rana | 24L-2504 | [Mahad-Jawad](https://github.com/Mahad-Jawad) | Prediction backend, input checks, tests and held-out evaluation |
+| Taimur Amir | 24L-2518 | [taimurrrr](https://github.com/taimurrrr) | Final model training, cutoff selection and training history |
 
-AI assistance was used to generate code and draft documentation. The report maps repository commits to the files and outputs they added.
+AI assistance was used to generate code and draft documentation. The team reviewed, ran and committed each part.
 
-## Reproduce Deliverable 2
+## Results
 
-Run from the repository root. Use an environment that can install the pinned packages in [requirements-lock.txt](requirements-lock.txt). The published evaluation run used Python 3.14 and scikit-learn 1.9.1. The following commands use the Python executable in your active environment.
+All scores come from 15,040 held-out purchases made by customers who were not used for training or model selection.
+
+| Method | Accuracy | Precision | Recall | F1 | ROC-AUC |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Always predict returned | 0.547 | 0.547 | 1.000 | 0.707 | 0.500 |
+| Product-type return-rate rule | 0.580 | 0.666 | 0.466 | 0.548 | 0.607 |
+| Deliverable 2 logistic model | 0.547 | 0.547 | 1.000 | 0.707 | 0.614 |
+| **Final gradient boosting model** | **0.607** | **0.678** | **0.536** | 0.599 | **0.651** |
+
+The Deliverable 2 model chose its cutoff by F1 and flagged every purchase. The final model adds shipping country, customer age, gender and premier membership, and chooses its cutoff (0.57) by balanced accuracy on validation data. It flags 6,513 of the 15,040 held-out purchases.
+
+## Run the app locally
+
+Use Python 3.12 or newer. From the repository root:
+
+```sh
+python -m venv .venv
+```
+
+Activate it with `.venv\Scripts\Activate.ps1` in Windows PowerShell or `source .venv/bin/activate` on macOS and Linux. Then run:
+
+```sh
+python -m pip install -r requirements.txt
+streamlit run app/streamlit_app.py
+```
+
+The app opens at http://localhost:8501. It loads the trained model from `models/final_model.joblib`, so it does not need the dataset.
+
+- **Single purchase:** pick a product type, brand, shipping country and customer details, and the score updates straight away.
+- **Upload a file:** upload a CSV with the columns `productType`, `brandDesc`, `shippingCountry`, `age_2021`, `isMale` and `premier`. You can download [a sample file](app/sample_purchases.csv) from the app. Results can be downloaded as a CSV.
+
+Run the tests with:
+
+```sh
+python -m pytest
+```
+
+## Reproduce the results
+
+These steps rebuild the data, models, figures and evidence files. The download needs internet access and about 364 MB. Use `requirements-lock.txt` for the exact package versions used to train the published model (scikit-learn 1.9.1).
 
 ```sh
 python -m pip install -r requirements-lock.txt
@@ -32,29 +75,40 @@ python src/baselines.py
 python src/train_models.py
 python src/evaluate_model.py
 python src/check_errors.py
+python src/train_final.py
+python src/evaluate_final.py
 ```
 
-Acquisition needs internet access and downloads about 364 MB. The training and evaluation commands create their working files in data/processed/, including a regenerated d2_model.joblib. Summary JSON and figures go to reports/evidence/ and reports/figures/. Run the original Phase 1 scripts preprocess.py, eda.py, and validate_pipeline.py under data scripts/ to reproduce the earlier preprocessing and EDA.
+The Deliverable 2 scripts write working files to `data/processed/`. `train_final.py` saves the final model to `models/`. Summary files go to `reports/evidence/` and figures to `reports/figures/`. The Deliverable 1 scripts `preprocess.py`, `eda.py` and `validate_pipeline.py` in `data scripts/` reproduce the earlier preprocessing and charts.
 
-To rebuild the Deliverable 2 PDF from the repository root in PowerShell:
+To rebuild the final report with [Tectonic](https://tectonic-typesetting.github.io/):
 
 ```sh
-tectonic reports/deliverable2/main.tex --outdir output/pdf
-if ($LASTEXITCODE -eq 0) { Move-Item -Force output/pdf/main.pdf output/pdf/Reclaim_Deliverable_2.pdf }
+tectonic reports/final/main.tex --outdir output/pdf
 ```
 
-## Evaluation
+Then rename `output/pdf/main.pdf` to `output/pdf/Reclaim_Final_Report.pdf`.
 
-The 100,000-event development sample was divided by customer into 69,996 training, 14,964 validation, and 15,040 test events, with zero customer overlap. Preprocessing was fitted on training data. Validation selected logistic regression and a cutoff of 0.42. Test results were:
+## Repository layout
 
-| Method | Accuracy | Precision | Recall | F1 | ROC-AUC |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Always predict returned | 0.547 | 0.547 | 1.000 | 0.707 | 0.500 |
-| Product-type return-rate rule | 0.580 | 0.666 | 0.466 | 0.548 | 0.607 |
-| Logistic regression | 0.547 | 0.547 | 1.000 | 0.707 | 0.614 |
+| Path | Contents |
+| --- | --- |
+| `app/` | Streamlit app and sample upload file |
+| `src/` | Data loading, split, baselines, training, evaluation and the prediction backend (`predict.py`) |
+| `data scripts/` | Deliverable 1 download, cleaning, preprocessing and charts |
+| `models/` | Trained Deliverable 2 and final models |
+| `tests/` | Tests for the prediction backend |
+| `reports/` | LaTeX reports, figures and JSON evidence |
+| `docs/` | Problem definition, data card and team notes |
 
-The logistic model ranked returns slightly better than the product-type rule. At 0.42 it flagged all 15,040 test purchases, including all 6,808 kept purchases. The report documents this operating-point failure and the [group error analysis](reports/evidence/d2_errors.json).
+## Data and limitations
 
-## Data and scope
+The data is the [ASOS GraphReturns dataset](https://osf.io/c793h/), described by [McGowan et al. (2023)](https://arxiv.org/abs/2302.14096) and licensed CC BY 4.0. Reclaim is not affiliated with ASOS. The raw and processed data are not stored in this repository.
 
-The [ASOS GraphReturns dataset](https://osf.io/c793h/) is described by [McGowan et al.](https://arxiv.org/abs/2302.14096) and listed as CC BY 4.0 by OSF. Reclaim uses a sample of joined events from the original training release. About 38% of raw events lacked a required customer or product match. The source selected customers with return history, and the separate later-period release was unused. The target is an individual purchase event, since the release has no basket identifiers. Product-average price and discount were excluded because their timing is uncertain. Shipping country was used for error analysis. See the [data card](docs/data_card.md) for provenance and limitations.
+- The target is one purchase event, because the data has no order or basket IDs.
+- Most product types, brands and countries are anonymised (for example `productType_B`), so the app shows those codes.
+- The source selected customers with a return history, so probabilities are higher than for a typical shopper.
+- Average price and discount were left out because it is unclear when they were recorded.
+- A ROC-AUC of 0.651 means the model ranks returns better than chance and better than the baselines, but it will still make many mistakes. Use it as a planning signal, not to make decisions about individual customers.
+
+See the [data card](docs/data_card.md) for full provenance.
