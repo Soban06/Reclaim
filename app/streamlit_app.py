@@ -1,4 +1,5 @@
 """Reclaim: score the return risk of fashion purchases with the final model."""
+import json
 import sys
 from pathlib import Path
 
@@ -10,6 +11,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from predict import LABELS, explain, load_model, predict  # noqa: E402
 
 SAMPLE_FILE = ROOT / "app" / "sample_purchases.csv"
+STATS_FILE = ROOT / "app" / "category_stats.json"
 BAND_COLOURS = {"High": "#B42318", "Elevated": "#C4320A", "Moderate": "#B54708", "Low": "#067647"}
 
 st.set_page_config(page_title="Reclaim", page_icon=":package:", layout="wide")
@@ -18,6 +20,26 @@ st.set_page_config(page_title="Reclaim", page_icon=":package:", layout="wide")
 @st.cache_resource
 def get_model():
     return load_model()
+
+
+@st.cache_resource
+def get_stats():
+    return json.loads(STATS_FILE.read_text(encoding="utf-8"))
+
+
+def category_select(container, column, model, stats):
+    """A drop-down that labels each anonymised code with its training return rate and share."""
+    counts = stats[column]
+    # Highest return rate first, so the list reads from riskiest to safest.
+    options = sorted(model["options"][column], key=lambda v: -counts.get(v, {}).get("return_rate", 0))
+
+    def label(value):
+        if value not in counts:
+            return value
+        return f"{value} ({counts[value]['return_rate']:.0%} returned, {counts[value]['share']:.0%} of purchases)"
+
+    return container.selectbox(LABELS[column], options, index=options.index(model["reference"][column]),
+                               format_func=label)
 
 
 def show_result(row, model):
@@ -36,18 +58,17 @@ def show_result(row, model):
                f"and {model['training_return_rate']:.0%} of all purchases were returned.")
 
 
-def single_purchase(model):
+def single_purchase(model, stats):
     st.subheader("Score one purchase")
     st.caption("The score updates as soon as you change a detail.")
     first, second = st.columns(2)
-    options = model["options"]
     reference = model["reference"]
-    product = first.selectbox(LABELS["productType"], options["productType"],
-                              index=options["productType"].index(reference["productType"]))
-    brand = first.selectbox(LABELS["brandDesc"], options["brandDesc"],
-                            index=options["brandDesc"].index(reference["brandDesc"]))
-    country = first.selectbox(LABELS["shippingCountry"], options["shippingCountry"],
-                              index=options["shippingCountry"].index(reference["shippingCountry"]))
+    product = category_select(first, "productType", model, stats)
+    brand = category_select(first, "brandDesc", model, stats)
+    country = category_select(first, "shippingCountry", model, stats)
+    first.caption("ASOS released the data with most categories anonymised, so each code is shown with "
+                  f"how often it was returned and its share of the {stats['purchases']:,} training purchases. "
+                  "Only Jeans and Pull&Bear keep their real names.")
     low, high = model["age_range"]
     age = second.number_input(LABELS["age_2021"], min_value=low, max_value=high,
                               value=int(reference["age_2021"]), step=1)
@@ -111,18 +132,20 @@ customer-separated sample of the [ASOS GraphReturns dataset](https://osf.io/c793
 - **Cutoff:** {model['threshold']:.2f}, chosen on validation data to balance missed returns and false alarms.
 - **Held-out results:** ROC-AUC 0.651 and accuracy 0.607 on 15,040 purchases from unseen customers.
 
-**Limits.** The dataset anonymises most product types, brands and countries (for example `productType_B`),
-so the app shows those codes. The source chose customers with return history, so probabilities run
+**Limits.** ASOS anonymised most product types, brands and countries (for example `productType_B`),
+and no key to the real names was published. The app shows those codes with each one's training
+return rate and share of purchases instead. The source chose customers with return history, so probabilities run
 higher than for a typical shopper. Treat the score as a planning signal, not a decision about a customer.
 """)
 
 
 model = get_model()
+stats = get_stats()
 st.title("Reclaim")
 st.write("Estimate the chance that a fashion purchase will be returned, for one order or a whole file.")
 single, upload, info = st.tabs(["Single purchase", "Upload a file", "About"])
 with single:
-    single_purchase(model)
+    single_purchase(model, stats)
 with upload:
     batch_upload(model)
 with info:

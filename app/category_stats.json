@@ -1,0 +1,165 @@
+{
+  "source": "training purchases",
+  "purchases": 69996,
+  "productType": {
+    "Jeans": {
+      "return_rate": 0.6658,
+      "share": 0.0914,
+      "purchases": 6397
+    },
+    "productType_A": {
+      "return_rate": 0.5231,
+      "share": 0.0256,
+      "purchases": 1793
+    },
+    "productType_B": {
+      "return_rate": 0.7216,
+      "share": 0.1623,
+      "purchases": 11359
+    },
+    "productType_C": {
+      "return_rate": 0.6361,
+      "share": 0.0254,
+      "purchases": 1775
+    },
+    "productType_D": {
+      "return_rate": 0.4868,
+      "share": 0.0302,
+      "purchases": 2114
+    },
+    "productType_E": {
+      "return_rate": 0.5639,
+      "share": 0.0337,
+      "purchases": 2357
+    },
+    "productType_F": {
+      "return_rate": 0.4933,
+      "share": 0.0236,
+      "purchases": 1654
+    },
+    "productType_G": {
+      "return_rate": 0.4898,
+      "share": 0.0237,
+      "purchases": 1660
+    },
+    "productType_H": {
+      "return_rate": 0.4309,
+      "share": 0.0778,
+      "purchases": 5449
+    },
+    "productType_I": {
+      "return_rate": 0.6342,
+      "share": 0.0439,
+      "purchases": 3073
+    },
+    "productType_J": {
+      "return_rate": 0.4741,
+      "share": 0.4624,
+      "purchases": 32365
+    }
+  },
+  "brandDesc": {
+    "Brand_A": {
+      "return_rate": 0.5529,
+      "share": 0.0188,
+      "purchases": 1315
+    },
+    "Brand_B": {
+      "return_rate": 0.572,
+      "share": 0.3083,
+      "purchases": 21582
+    },
+    "Brand_C": {
+      "return_rate": 0.6166,
+      "share": 0.0181,
+      "purchases": 1265
+    },
+    "Brand_D": {
+      "return_rate": 0.5804,
+      "share": 0.0152,
+      "purchases": 1063
+    },
+    "Brand_E": {
+      "return_rate": 0.5431,
+      "share": 0.03,
+      "purchases": 2099
+    },
+    "Brand_F": {
+      "return_rate": 0.52,
+      "share": 0.0261,
+      "purchases": 1829
+    },
+    "Brand_G": {
+      "return_rate": 0.4791,
+      "share": 0.0184,
+      "purchases": 1290
+    },
+    "Brand_I": {
+      "return_rate": 0.5944,
+      "share": 0.0266,
+      "purchases": 1859
+    },
+    "Brand_J": {
+      "return_rate": 0.5885,
+      "share": 0.039,
+      "purchases": 2729
+    },
+    "Brand_K": {
+      "return_rate": 0.5203,
+      "share": 0.4871,
+      "purchases": 34095
+    },
+    "Pull&Bear": {
+      "return_rate": 0.6,
+      "share": 0.0124,
+      "purchases": 870
+    }
+  },
+  "shippingCountry": {
+    "Country_A": {
+      "return_rate": 0.4479,
+      "share": 0.0175,
+      "purchases": 1228
+    },
+    "Country_B": {
+      "return_rate": 0.6466,
+      "share": 0.0133,
+      "purchases": 931
+    },
+    "Country_C": {
+      "return_rate": 0.4887,
+      "share": 0.0108,
+      "purchases": 755
+    },
+    "Country_D": {
+      "return_rate": 0.4313,
+      "share": 0.0423,
+      "purchases": 2963
+    },
+    "Country_E": {
+      "return_rate": 0.6903,
+      "share": 0.24,
+      "purchases": 16801
+    },
+    "Country_F": {
+      "return_rate": 0.6052,
+      "share": 0.0185,
+      "purchases": 1297
+    },
+    "Country_G": {
+      "return_rate": 0.4986,
+      "share": 0.554,
+      "purchases": 38777
+    },
+    "Country_H": {
+      "return_rate": 0.5113,
+      "share": 0.0723,
+      "purchases": 5060
+    },
+    "Country_I": {
+      "return_rate": 0.4789,
+      "share": 0.0312,
+      "purchases": 2184
+    }
+  }
+}
